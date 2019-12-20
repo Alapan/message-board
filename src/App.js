@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Navigation from './Navigation';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Channel from './Channel';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+
+const useStyles = makeStyles(({spacing}) => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginTop: spacing(5)
+    }
+}));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const classes = useStyles();
+    return (
+        <div className={classes.container}>
+            <Router>
+                <Route exact path='/' component={Navigation} />
+                <Route path='/:id' component={Channel} />
+            </Router>
+        </div>
+    );
 }
 
 export default App;
